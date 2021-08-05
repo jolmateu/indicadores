@@ -1,0 +1,45 @@
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<form action="/add_indicador" method="POST">
+    <input type="text" value="{{ id2 }}" name="id" readonly>
+    <select name="ind_name" id="ind_name">
+        {% for indicador in indicadores %}
+            <option>{{ indicador.3 }}</option>
+        {% endfor %}
+    </select>
+    <input type="number" name="valor" placeholder="Valor">
+    <input type="date" name="fecha" placeholder="Fecha">
+    <button type="submit">
+        Enviar
+    </button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <td>Proceso</td>
+            <td>Indicador</td>
+            <td>Valor</td>
+            <td>Fecha</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for indicador in indicadores %}
+        <tr>
+            <td>{{ indicador.2 }}</td>
+            <td>{{ indicador.3 }}</td>
+            <td>{{ indicador.4 }}</td>
+            <td>{{ indicador.5 }}</td>
+            <td>
+                <a href="/delete/{{indicador.0}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
